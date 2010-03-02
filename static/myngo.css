@@ -1,0 +1,115 @@
+body {
+    font-family: Helvetica,Arial,sans-serif;
+}
+header, footer {
+    display: block;
+    width: 100%;
+    background-color: #402817;
+    color: #AA814D;
+}
+header {
+    margin-bottom: 0px;
+}
+nav a, footer a, nav a:visited, footer a:visited {
+    color: #AA814D;
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+a:visited {
+    color: black;
+}
+a:hover, nav a:hover, footer a:hover {
+    color: #009100;
+}
+nav a {
+    background: white;
+    font-weight: bold;
+    padding: 2px 15px 5px;
+}
+nav a.active {
+    background: #402817;
+    color: #F6F4CD;
+    -moz-border-radius-bottomleft: 7px;
+    -moz-border-radius-bottomright: 7px;
+    -webkit-border-bottom-left-radius: 7px;
+    -webkit-border-bottom-right-radius: 7px;
+}
+table {
+    width: 100%;
+}
+table thead {
+    background-color: #402817;
+    color: #F6F4CD;
+}
+footer {
+    margin-top: 5em;
+}
+.action {
+    font-size: 0.8em;
+    cursor: pointer;
+}
+td.secondary {
+    font-size: 0.9em;
+    color: #5F5F5F;
+}
+section h4{
+    padding-top: 2em;
+    padding-bottom: 1em;
+    font-weight: bold;
+}
+#actions {
+    padding-top: 2em;
+    margin-bottom: 1em;
+}
+#actions span {
+    float: right;
+    margin-right: 8em;
+    font-weight: bold;
+}
+
+/* CSS from jQuery tools, modified */
+.modal { 
+    background-color:#333; 
+    border:2px solid #333;
+    color: white;
+    display:none;  
+    opacity:0.94; 
+    padding:28px; 
+    text-align:left; 
+    -moz-border-radius:6px; 
+    -webkit-border-radius:6px; 
+    -moz-box-shadow: 0 0 50px #ccc; 
+    -webkit-box-shadow: 0 0 50px #ccc; 
+} 
+ 
+.modal h3 { 
+    border-bottom:1px solid #333; 
+    font-size:20px;
+    margin:0px; 
+    padding-bottom: 20px;
+}
+/* close button positioned on upper right corner */ 
+.modal .close { 
+    background-image:url(/static/close.png); 
+    position:absolute; 
+    right:-15px; 
+    top:-15px; 
+    cursor:pointer; 
+    height:35px; 
+    width:35px; 
+}
+/* sexy black metallic button */
+button {
+	border:1px solid #fff;	
+	background-color:#222;
+	color:#fff;
+	cursor:pointer;
+	font-size:11px;
+	height:24px;
+	outline:1px outset #999;	
+	-moz-border-radius:4px;
+	-moz-outline-radius:4px;
+}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block grid %}
+
+<section>
+    <h4>Server info:</h4>
+    <ul>
+    {% for k in server_data.keys() %}
+        <li>{{ k }}: {{ server_data[k] }}</li>
+    {% end %}
+    </ul>
+</section>
+<section>
+    <h4>Replication info:</h4>
+    TODO
+    <ul>
+    {% for k in replication_data.keys() %}
+        <li>{{ k }}: {{ replication_data[k] }}</li>
+    {% end %}
+    </ul>
+</section>
+<section>
+    <h4>Sharding info:</h4>
+    TODO
+    <ul>
+    {% for k in sharding_data.keys() %}
+        <li>{{ k }}: {{ sharding_data[k] }}</li>
+    {% end %}
+    </ul>
+</section>
+
+
+{% end %}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<title>Myngo</title>
+	<link type="text/css" rel="stylesheet" href="/static/emastic.css" />
+	<link type="text/css" rel="stylesheet" href="/static/myngo.css" />
+	<script type="text/javascript" src="/static/jquery-1.4.1.min.js"></script>
+	<script type="text/javascript" src="/static/jquery.tools.min.js"></script>
+	<script type="text/javascript" src="/static/myngo.js"></script>
+    </head>
+    <body>
+	<div class="main">
+	{% include 'header.html' %}
+	{% include 'navigation.html' %}
+	{% include 'actions.html' %}
+
+	{% block grid %}
+	{% end %}
+
+	{% include 'footer.html' %}
+	</div>
+    </body>
+</html>
