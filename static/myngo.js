@@ -47,17 +47,17 @@ $(document).ready(function () {
     });
 
     /* actions on the DB list page */
-    $('a[name="clone"]').click(function () {
+    $('a[name="cloneDB"]').click(function () {
 	var dbName = $(this).parent().siblings().first().children('a').text();
-	$('#cloneDiv h3').text('Enter name for clone of database "'+dbName+'":');
-	$('#cloneDiv form input[name="original"]').attr('value', dbName);
+	$('#cloneDBDiv h3').text('Enter name for clone of database "'+dbName+'":');
+	$('#cloneDBDiv form input[name="original"]').attr('value', dbName);
 	$(this).overlay({api: true}).load();
-	$('#cloneDiv input').focus();
+	$('#cloneDBDiv input').focus();
     });
-    $('a[name="drop"]').click(function () {
+    $('a[name="dropDB"]').click(function () {
 	var dbName = $(this).parent().siblings().first().children('a').text();
-	$('#dropDiv h3').text('Are you sure you want to drop database "'+dbName+'"?');
-	$('#dropDiv form input[name="db"]').attr('value', dbName);
+	$('#dropDBDiv h3').text('Are you sure you want to drop database "'+dbName+'"?');
+	$('#dropDBDiv form input[name="db"]').attr('value', dbName);
 	$(this).overlay({api: true}).load();
     });
     $('#dropDiv form button[value="No"]').click(function () {
@@ -66,15 +66,15 @@ $(document).ready(function () {
 	   "cancel" button as the previous doesn't work */
 	$('#dropDiv div.close').click();
     });
-    $('a[name="repair"]').click(function () {
+    $('a[name="repairDB"]').click(function () {
 	var dbName = $(this).parent().siblings().first().children('a').text();
-	$('#repairDiv h3').text('Really repair the database "'+dbName+'"?');
-	$('#repairDiv form input[name="db"]').attr('value', dbName);
+	$('#repairDBDiv h3').text('Really repair the database "'+dbName+'"?');
+	$('#repairDBDiv form input[name="db"]').attr('value', dbName);
 	$(this).overlay({api: true}).load();	
     });
 
     /* submitting the DB clone form */
-    $('#cloneDiv form').submit(function () {
+    $('#cloneDBDiv form').submit(function () {
 	var url = $(this).attr('action');
 	var val = $(this).children('input').val();
 	var data = $(this).serialize();
@@ -93,7 +93,7 @@ $(document).ready(function () {
 	return false;
     });
     /* submitting the DB drop form */
-    $('#dropDiv form').submit(function () {
+    $('#dropDBDiv form').submit(function () {
 	var url = $(this).attr('action');
 	var data = $(this).serialize();
 	xpost(url,
@@ -111,7 +111,7 @@ $(document).ready(function () {
 	return false;
     });
     /* submitting the DB repair form */
-    $('#repairDiv form').submit(function () {
+    $('#repairDBDiv form').submit(function () {
 	var url = $(this).attr('action');
 	var data = $(this).serialize();
 	xpost(url,

@@ -4,6 +4,9 @@ from handlers import BaseHandler
 from pymongo.son import SON
 import tornado.web
 
+#
+# DB actions
+#
 class CloneDatabase(BaseHandler):
 
     def post(self):

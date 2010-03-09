@@ -14,9 +14,9 @@
 	    <td><a href="/{{ row[0] }}/">{{ row[0] }}</a></td>
 	    <td class="secondary">{{ format.pprint_list(row[1]) }}</td>
 	    <td>
-		<a class="action" name="clone" rel="#cloneDiv">Clone</a>
-		<a class="action" name="drop" rel="#dropDiv">Drop</a>
-		<a class="action" name="repair" rel="#repairDiv">Repair</a>
+		<a class="action" name="cloneDB" rel="#cloneDBDiv">Clone</a>
+		<a class="action" name="dropDB" rel="#dropDBDiv">Drop</a>
+		<a class="action" name="repairDB" rel="#repairDBDiv">Repair</a>
 	    </td>
 	</tr>
 	{% end %}
@@ -24,7 +24,7 @@
 </table>
 <div class="clear"></div>
 
-<div class="modal" id="cloneDiv">
+<div class="modal" id="cloneDBDiv">
     <h3></h3><!-- text filled in by JS -->
     <form method="post" action="/x_clone_db/">
 	{{ xsrf_form_html() }}
@@ -33,7 +33,7 @@
 	<button type="submit" value="Clone">Clone</button>
     </form>   
 </div>
-<div class="modal" id="dropDiv">
+<div class="modal" id="dropDBDiv">
     <h3></h3><!-- text filled in by JS -->
     <form method="post" action="/x_drop_db/">
 	{{ xsrf_form_html() }}
@@ -42,7 +42,7 @@
 	<button type="button" value="No">No, cancel</button>
     </form>   
 </div>
-<div class="modal" id="repairDiv">
+<div class="modal" id="repairDBDiv">
     <h3></h3><!-- text filled in by JS -->
     <form method="post" action="/x_repair_db/">
 	{{ xsrf_form_html() }}
