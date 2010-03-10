@@ -60,11 +60,11 @@ $(document).ready(function () {
 	$('#dropDBDiv form input[name="db"]').attr('value', dbName);
 	$(this).overlay({api: true}).load();
     });
-    $('#dropDiv form button[value="No"]').click(function () {
-	/* $('#dropDiv').overlay().close(); */
+    $('#dropDBDiv form button[value="No"]').click(function () {
+	/* $('#dropDBDiv').overlay().close(); */
 	/* close drop database overlay by immitating click on the
 	   "cancel" button as the previous doesn't work */
-	$('#dropDiv div.close').click();
+	$('#dropDBDiv div.close').click();
     });
     $('a[name="repairDB"]').click(function () {
 	var dbName = $(this).parent().siblings().first().children('a').text();
