@@ -25,17 +25,18 @@ class BaseHandler(tornado.web.RequestHandler):
         path = os.path.join(conf.TEMPLATE_PATH, template_name)
         super(BaseHandler, self).render(path, **kwargs)
 
-    def respond_back_result(self, result, **kwargs):
+    def respond_back_result(self, result):
         """ Transforms MongoDB command result to JSON. """
         rok = int(result['ok'])
         if rok == 1:
-            d = {'success': True}
-            d.update(kwargs)
-            self.write(simplejson.dumps(d))
+            res = {'success': True}
+            res.update(result)
+            self.write(simplejson.dumps(res))
         else:
             self.write(simplejson.dumps({'success': False}))
 
         self.finish()
+
 
 class DatabaseHandler(BaseHandler):
 
