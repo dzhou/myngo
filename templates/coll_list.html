@@ -13,10 +13,48 @@
 	<tr>
 	    <td><a href="/{{ db_name }}/{{ row[0] }}/">{{ row[0] }}</a></td>
 	    <td>{{ row[1]}}</td>
+	    <td>
+		<a class="action" name="dropColl" rel="#dropCollDiv">Drop</a>
+		<a class="action" name="renameColl" rel="#renameCollDiv">Rename</a>
+		<a class="action" name="validateColl" rel="#validateCollDiv">Validate</a>
+	    </td>
 	</tr>
 	{% end %}
     </tbody>
 </table>
+<div class="clear"></div>
 
+<div class="modal" id="renameCollDiv">
+    <h3></h3><!-- text filled in by JS -->
+    <form method="post" action="/x_rename_coll/">
+	{{ xsrf_form_html() }}
+	<input type="hidden" name="db" value="{{ db_name }}" />
+	<input type="text" name="new" />
+	<input type="hidden" name="original" value="" />
+	<button type="submit" value="Rename">Rename</button>
+    </form>
+</div>
+<div class="modal" id="dropCollDiv">
+    <h3></h3><!-- text filled in by JS -->
+    <form method="post" action="/x_drop_coll/">
+	{{ xsrf_form_html() }}
+	<input type="hidden" name="db" value="{{ db_name }}" />
+	<input type="hidden" name="coll" value="" />
+	<button type="submit" value="Yes">Yes, drop</button>
+	<button type="button" value="No">No, cancel</button>
+    </form>
+</div>
+<div class="modal" id="validateCollDiv">
+    <h3></h3><!-- text filled in by JS -->
+    <p></p>
+    <!-- form is deleted when the validate request is triggered
+	 it is here just for the XSRF protection and ease of
+	 manipulation -->
+    <form method="post" action="/x_validate_coll/">
+	{{ xsrf_form_html() }}
+	<input type="hidden" name="db" value="{{ db_name }}" />
+	<input type="hidden" name="coll" value="" />
+    </form>
+</div>
 
 {% end %}

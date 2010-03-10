@@ -8,6 +8,7 @@ import os
 import simplejson
 import tornado.web
 
+
 class BaseHandler(tornado.web.RequestHandler):
 
     @property
@@ -50,10 +51,11 @@ class DatabaseHandler(BaseHandler):
 class CollectionHandler(BaseHandler):
 
     def get(self, db_name):
-        table = {'headers': ('Name', 'No. of documents'),
+        table = {'headers': ('Name', 'No. of documents', 'Actions'),
                  'rows': [[coll, self.c[db_name][coll].count()]
                           for coll in self.c[db_name].collection_names()]}
         self.render('coll_list.html', table=table, db_name=db_name)
+
 
 class CollectionDetailHandler(BaseHandler):
 
@@ -74,11 +76,14 @@ class CollectionDetailHandler(BaseHandler):
         count = cursor.count()        
         pass
 
+
 class LogHandler(BaseHandler):
     pass
 
+
 class ShellHandler(BaseHandler):
     pass
+
 
 class ServerInfoHandler(BaseHandler):
 

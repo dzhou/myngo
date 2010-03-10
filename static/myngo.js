@@ -76,7 +76,6 @@ $(document).ready(function () {
     /* submitting the DB clone form */
     $('#cloneDBDiv form').submit(function () {
 	var url = $(this).attr('action');
-	var val = $(this).children('input').val();
 	var data = $(this).serialize();
 	xpost(url,
 	      data,
@@ -85,7 +84,7 @@ $(document).ready(function () {
 		  setTimeout(function () {
 		      $('#actionWinDiv').overlay().close();
 		      document.location = '/';
-		  }, 1618);
+		  }, 809);
 	      },
 	      function () {
 		  $('#actionFailDiv').overlay({api: true}).load();
@@ -103,7 +102,7 @@ $(document).ready(function () {
 		  setTimeout(function () {
 		      $('#actionWinDiv').overlay().close();
 		      document.location = '/';
-		  }, 1618);
+		  }, 809);
 	      },
 	      function () {
 		  $('#actionFailDiv').overlay({api: true}).load();
@@ -120,10 +119,89 @@ $(document).ready(function () {
 		  $('#actionWinDiv').overlay({api: true}).load();
 		  setTimeout(function () {
 		      $('#actionWinDiv').overlay().close();
-		  }, 1618);
+		  }, 809);
 	      },
 	      function () {
 		  $('#actionFailDiv').overlay({api: true}).load();
+		  return false;
+	      });
+	return false;
+    });
+
+    /* actions on the collection list page */
+    $('a[name="dropColl"]').click(function () {
+	var collName = $(this).parent().siblings('td:first').text();
+	$('#dropCollDiv h3').text('Are you sure you want to drop collection "'+collName+'"?');
+	$('#dropCollDiv form input[name="coll"]').attr('value', collName);
+	$(this).overlay({api: true}).load();
+    });
+    $('#dropCollDiv form button[value="No"]').click(function () {
+	$('#dropCollDiv div.close').click(); /* for expl. see the same method at drop DB */
+    });
+    $('a[name="renameColl"]').click(function () {
+	var collName = $(this).parent().siblings('td:first').text();
+	$('#renameCollDiv h3').text('Enter new name for collection "'+collName+'":');
+	$('#renameCollDiv form input[name="original"]').attr('value', collName);
+	$(this).overlay({api: true}).load();
+	$('#renameCollDiv input[name="new"]').focus();
+    });
+    $('a[name="validateColl"]').click(function () {
+	var collName = $(this).parent().siblings('td:first').text();
+	$('#validateCollDiv form input[name="coll"]').attr('value', collName);
+	var url = $('#validateCollDiv form').attr('action');
+	xpost(url,
+	      $('#validateCollDiv form').serialize(),
+	      function (data) {
+		  $('#validateCollDiv h3').text('Result of validating "'+data.ns+'":');
+		  $('#validateCollDiv h3').after(data.result);
+		  $('#validateCollDiv').overlay({api: true}).load();
+		  return false;
+	      },
+	      function () {
+		  $('#actionFailDiv').overlay({api: true}).load();
+		  return false;
+	      });
+	$('#validateCollDiv form').remove();
+	return false;
+    });
+
+    /* submitting the collection rename form */
+    $('#renameCollDiv form').submit(function () {
+	var url = $(this).attr('action');
+	var data = $(this).serialize();
+	xpost(url,
+	      data,
+	      function () {
+		  $('#actionWinDiv').overlay({api: true}).load();
+		  setTimeout(function () {
+		      $('#actionWinDiv').overlay().close();
+		      document.location = document.location.pathname;
+		  }, 809);
+		  return false;
+	      },
+	      function () {
+		  $('#actionFailDiv').overlay({api: true}).load();
+		  return false;
+	      });
+	return false;
+    });
+    /* submitting the collection drop form */
+    $('#dropCollDiv form').submit(function () {
+	var url = $(this).attr('action');
+	var data = $(this).serialize();
+	xpost(url,
+	      data,
+	      function () {
+		  $('#actionWinDiv').overlay({api: true}).load();
+		  setTimeout(function () {
+		      $('#actionWinDiv').overlay().close();
+		      document.location = document.location.pathname;
+		  }, 809);
+		  return false;
+	      },
+	      function () {
+		  $('#actionFailDiv').overlay({api: true}).load();
+		  return false;
 	      });
 	return false;
     });
