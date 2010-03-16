@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import conf
-import connection
 import pp
 import pymongo
 import os
@@ -14,10 +13,6 @@ class BaseHandler(tornado.web.RequestHandler):
     @property
     def c(self):
         return pymongo.Connection(conf.MONGO_HOST, conf.MONGO_PORT)
-
-    # def finish(self, chunk=None):
-    #     self.c.end_request()
-    #     super(BaseHandler, self).finish(chunk=chunk)
 
     def render(self, template_name, **kwargs):
         kwargs.update({'format': pp})
