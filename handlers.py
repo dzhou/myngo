@@ -5,6 +5,7 @@ import pp
 import pymongo
 import os
 import tornado.web
+import bson
 
 try:
     import simplejson as json
@@ -60,10 +61,10 @@ class CollectionDetailHandler(BaseHandler):
     def get(self, db_name, coll_name):
         # TODO: collections; sort by object IDs, column will be all top-level keys
         page = self.get_argument('page', 0)
-        sort_by = self.get_argument('sort_by')
+        #sort_by = self.get_argument('sort_by')
         cursor = self.c[db_name][coll_name].find()
         objects = cursor.sort('_id').skip(page * 50).limit(50)
-        headers = set()
+
         # TODO: decide if to use own fork of Tornado with sessions
         #       as so I could easily display columns, remember sorting
         #       direction etc.
@@ -71,9 +72,17 @@ class CollectionDetailHandler(BaseHandler):
         #       http://www.mongodb.org/display/DOCS/UI and Futon for CouchDB
         #       to get inspiration on what features to implement
             
-        count = cursor.count()        
-        pass
+        #count = cursor.count()        
+        cols = [col for col in objects[0].keys() if col!="_id" ][:15]
+        table = { 'headers': cols, 'rows': objects, 
+                'db_name': db_name, 'coll_name': coll_name }
+        self.render('obj_list.html', table=table)
 
+class ObjectDetailHandler(BaseHandler):
+    def get(self, db_name, coll_name, rec_id):
+        obj = self.c[db_name][coll_name].find_one({'_id': bson.ObjectId(rec_id)})
+        table = { 'items': obj.items() }
+        self.render('obj_detail.html', table=table)
 
 class LogHandler(BaseHandler):
     pass
@@ -105,6 +114,7 @@ urls = [(r'/', DatabaseHandler),
         (r'/_log/?$', LogHandler),
         (r'/_shell/?$', ShellHandler),
         (r'/_server/?$', ServerInfoHandler),
+        (r'/(?P<db_name>[^_]\S+)/(?P<coll_name>\S+[^/])/(?P<rec_id>\S+[^/])/?$', ObjectDetailHandler),
         (r'/(?P<db_name>[^_]\S+)/(?P<coll_name>\S+[^/])/?$', CollectionDetailHandler),
         (r'/(?P<db_name>[^_]\S+[^/])/?$', CollectionHandler),
         ]
