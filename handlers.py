@@ -4,9 +4,12 @@ import conf
 import pp
 import pymongo
 import os
-import simplejson
 import tornado.web
 
+try:
+    import simplejson as json
+except ImportError:
+    import json
 
 class BaseHandler(tornado.web.RequestHandler):
 
@@ -27,9 +30,9 @@ class BaseHandler(tornado.web.RequestHandler):
         if rok == 1:
             res = {'success': True}
             res.update(result)
-            self.write(simplejson.dumps(res))
+            self.write(json.dumps(res))
         else:
-            self.write(simplejson.dumps({'success': False}))
+            self.write(json.dumps({'success': False}))
 
         self.finish()
 
