@@ -17,3 +17,6 @@ STATIC_PATH = os.path.join(PROJECT_PATH, 'static')
 # MongoDB
 MONGO_PORT = 27017
 MONGO_HOST = 'localhost'
+MONGO_USER = None
+MONGO_PASSWD = None
+

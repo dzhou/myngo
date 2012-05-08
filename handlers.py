@@ -16,7 +16,10 @@ class BaseHandler(tornado.web.RequestHandler):
 
     @property
     def c(self):
-        return pymongo.Connection(conf.MONGO_HOST, conf.MONGO_PORT)
+        db = pymongo.Connection(conf.MONGO_HOST, conf.MONGO_PORT)
+        if conf.MONGO_USER:
+            db.admin.authenticate(conf.MONGO_USER, conf.MONGO_PASSWD)
+        return db
 
     def render(self, template_name, **kwargs):
         kwargs.update({'format': pp})
@@ -60,7 +63,7 @@ class CollectionDetailHandler(BaseHandler):
 
     def get(self, db_name, coll_name):
         # TODO: collections; sort by object IDs, column will be all top-level keys
-        page = self.get_argument('page', 0)
+        page = int(self.get_argument('page', 0))
         #sort_by = self.get_argument('sort_by')
         cursor = self.c[db_name][coll_name].find()
         objects = cursor.sort('_id').skip(page * 50).limit(50)
